@@ -5,30 +5,34 @@ on:
     branches:
       - main
 
+# Node.js 24 사용 (Node.js 20 deprecation 경고 해결)
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
-  # 1단계: 깃허브 클라우드 컴퓨터(ubuntu)에서 부담 없이 도커 이미지를 빌드하고 Docker Hub로 Push합니다.
+  # 1단계: GitHub 클라우드(ubuntu)에서 Docker 이미지를 빌드하고 Docker Hub로 Push
   build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the codebase
         uses: actions/checkout@v4
-        
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
+
       - name: Extract metadata for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/mlops-sentiment-api
           tags: type=raw,value=latest
-          
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -39,32 +43,46 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # 2단계: 빌드가 완료되면 님의 컴퓨터(self-hosted)가 이미지를 내려받아 실행합니다!
+  # 2단계: 빌드 완료 후, 내 컴퓨터(self-hosted runner)에서 자동 배포
   deploy-to-local:
     needs: build-and-push
     runs-on: self-hosted
     steps:
-      # Docker Hub 로그인 (가져올 때도 Rate Limit 문제 방지)
+      # Docker Hub 로그인
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Docker 데몬 실행 상태 확인 (Windows에서 Docker Desktop이 켜져 있어야 함)
+      - name: Check Docker is running
+        shell: cmd
+        run: docker info
+
       # 최신 이미지 다운로드
-      - name: Pull latest image
+      - name: Pull latest image from Docker Hub
+        shell: cmd
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mlops-sentiment-api:latest
 
-      # 기존에 돌고 있던 컨테이너 중지 (에러 무시)
+      # 기존 컨테이너 중지 (없을 경우 에러 무시)
       - name: Stop existing container
+        shell: cmd
         run: docker stop mlops-api-container
         continue-on-error: true
 
-      # 기존 컨테이너 삭제 (에러 무시)
+      # 기존 컨테이너 삭제 (없을 경우 에러 무시)
       - name: Remove existing container
+        shell: cmd
         run: docker rm mlops-api-container
         continue-on-error: true
 
-      # 새로 다운받은 따끈따끈한 이미지로 컨테이너 실행
+      # 새 컨테이너 실행 (8000 포트로 서비스 시작, 자동 재시작 설정 포함)
       - name: Run new container
-        run: docker run -d --name mlops-api-container -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/mlops-sentiment-api:latest
+        shell: cmd
+        run: docker run -d --name mlops-api-container --restart unless-stopped -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/mlops-sentiment-api:latest
+
+      # 배포 확인 (컨테이너가 정상 실행 중인지 검증)
+      - name: Verify deployment
+        shell: cmd
+        run: docker ps --filter "name=mlops-api-container" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
