@@ -24,7 +24,7 @@ COPY ./app ./app
 # 🔥 도커 빌드 시점에 모델을 미리 다운로드하여 이미지에 내장 
 # -> 이를 통해 컨테이너가 켜질 때 모델을 다운받는 시간을 획기적으로 없애고, (Cold Start 방지)
 # -> 폐쇄망(Offline) 환경 등 인터넷이 없는 환경에서도 컨테이너를 실행할 수 있게 최적화
-RUN python -c "from transformers import pipeline; pipeline('text-classification', model='Seonghaa/koelectra-base-v3-discriminator-finetuned-emotion')"
+RUN python -c "from transformers import pipeline; pipeline('text-classification', model='Seonghaa/korean-emotion-classifier-roberta')"
 
 # 서버 포트 노출
 EXPOSE 8000
