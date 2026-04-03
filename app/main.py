@@ -17,9 +17,18 @@ def predict_sentiment(request: SentimentRequest):
     """
     입력된 텍스트의 6가지 감정 강도를 예측합니다.
     """
-    result = sentiment_model.predict(request.text)
-    return SentimentResponse(
-        top_emotion=result["top_emotion"], 
-        intensities=result["intensities"], 
-        score=result["score"]
-    )
+    try:
+        # 비어있는 문장 등에 대한 기본적인 방어 코드
+        if not request.text or not request.text.strip():
+            return SentimentResponse(top_emotion="중립", intensities={}, score=0.0)
+
+        result = sentiment_model.predict(request.text)
+        return SentimentResponse(
+            top_emotion=result.get("top_emotion", "중립"), 
+            intensities=result.get("intensities", {}), 
+            score=result.get("score", 0.0)
+        )
+    except Exception as e:
+        # 엔드포인트 차원에서의 예외 처리
+        print(f"[API ERROR] {str(e)}")
+        return SentimentResponse(top_emotion="에러 발생", intensities={}, score=0.0)
