@@ -27,7 +27,8 @@ class SentimentModel:
         return 5
 
     def predict(self, text: str) -> dict:
-        results = self.classifier(text)[0]
+        # top_k=None을 설정하면 항상 모든 감정의 점수를 리스트 형태로 반환합니다.
+        results = self.classifier(text, top_k=None)[0]
         
         # 모델의 실제 라벨: 0:공포, 1:놀람, 2:분노, 3:슬픔, 4:중립, 5:행복, 6:혐오
         intensities = {}
@@ -36,6 +37,7 @@ class SentimentModel:
         conf_score = 0
         
         for res in results:
+            # 이제 res는 확실히 {'label': '...', 'score': ...} 형태의 딕셔너리입니다.
             label = res['label']
             score = res['score']
             
