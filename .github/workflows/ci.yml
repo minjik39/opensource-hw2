@@ -1,40 +1,34 @@
-name: Build and Push ML API to Docker Hub
+name: CI/CD Pipeline for ML API
 
-# 코드가 GitHub 저장소의 main 브랜치에 Push될 때만 트리거됩니다.
 on:
   push:
     branches:
       - main
 
 jobs:
+  # 1단계: 깃허브 클라우드 컴퓨터(ubuntu)에서 부담 없이 도커 이미지를 빌드하고 Docker Hub로 Push합니다.
   build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-      # 1. GitHub 저장소에서 코드 내려받기
       - name: Checkout the codebase
         uses: actions/checkout@v4
-
-      # 2. 멀티 아키텍처 지원 (필요시)
+        
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      # 3. Docker Hub 로그인 과정 (보안을 위해 GitHub Secrets 사용)
+        
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # 4. 이미지 태그와 라벨을 동적으로 생성
+          
       - name: Extract metadata for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # 원하시는 Docker Hub 레포지토리 이름으로 변경 가능합니다.
           images: ${{ secrets.DOCKERHUB_USERNAME }}/mlops-sentiment-api
-
-      # 5. 최적화된 도커 이미지를 빌드하고 Docker Hub로 Push (캐싱 사용)
+          tags: type=raw,value=latest
+          
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -42,6 +36,35 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # 하단 코드는 도커 빌드 속도 향상을 위해 GitHub 캐시 레이어를 사용하는 설정입니다.
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  # 2단계: 빌드가 완료되면 님의 컴퓨터(self-hosted)가 이미지를 내려받아 실행합니다!
+  deploy-to-local:
+    needs: build-and-push
+    runs-on: self-hosted
+    steps:
+      # Docker Hub 로그인 (가져올 때도 Rate Limit 문제 방지)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 최신 이미지 다운로드
+      - name: Pull latest image
+        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mlops-sentiment-api:latest
+
+      # 기존에 돌고 있던 컨테이너 중지 (에러 무시)
+      - name: Stop existing container
+        run: docker stop mlops-api-container
+        continue-on-error: true
+
+      # 기존 컨테이너 삭제 (에러 무시)
+      - name: Remove existing container
+        run: docker rm mlops-api-container
+        continue-on-error: true
+
+      # 새로 다운받은 따끈따끈한 이미지로 컨테이너 실행
+      - name: Run new container
+        run: docker run -d --name mlops-api-container -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/mlops-sentiment-api:latest

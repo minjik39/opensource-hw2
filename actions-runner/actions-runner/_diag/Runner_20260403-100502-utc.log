@@ -1,0 +1,105 @@
+[2026-04-03 10:05:02Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2026-04-03 10:05:02Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:02Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:02Z INFO HostContext] Well known config file 'Credentials': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.credentials'
+[2026-04-03 10:05:02Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:02Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:02Z INFO HostContext] Well known config file 'Runner': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.runner'
+[2026-04-03 10:05:03Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2026-04-03 10:05:03Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.26200.
+[2026-04-03 10:05:03Z INFO Listener] Version: 2.333.1
+[2026-04-03 10:05:03Z INFO Listener] Commit: 6792966801e8925346735b68c03bf9f347af4646
+[2026-04-03 10:05:03Z INFO Listener] Culture: ko-KR
+[2026-04-03 10:05:03Z INFO Listener] UI Culture: ko-KR
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO Listener] Validating directory permissions for: 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO CommandLineParser] Parse
+[2026-04-03 10:05:03Z INFO CommandLineParser] Parsing 1 args
+[2026-04-03 10:05:03Z INFO CommandLineParser] parsing argument
+[2026-04-03 10:05:03Z INFO CommandLineParser] HasArgs: False
+[2026-04-03 10:05:03Z INFO CommandLineParser] Adding Command: remove
+[2026-04-03 10:05:03Z INFO Listener] Arguments parsed
+[2026-04-03 10:05:03Z INFO Runner] ExecuteCommand
+[2026-04-03 10:05:03Z INFO ConfigurationStore] currentAssemblyLocation: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin\Runner.Listener.dll
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] binPath: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] RootFolder: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO HostContext] Well known config file 'Runner': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.runner'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] ConfigFilePath: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.runner
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO HostContext] Well known config file 'MigratedRunner': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.runner_migrated'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] MigratedConfigFilePath: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.runner_migrated
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO HostContext] Well known config file 'Credentials': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.credentials'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] CredFilePath: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.credentials
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.credentials_migrated'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] MigratedCredFilePath: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.credentials_migrated
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Bin': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\bin'
+[2026-04-03 10:05:03Z INFO HostContext] Well known directory 'Root': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner'
+[2026-04-03 10:05:03Z INFO HostContext] Well known config file 'Service': 'D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.service'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] ServiceConfigFilePath: D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.service
+[2026-04-03 10:05:03Z INFO CommandSettings] Flag 'help': 'False'
+[2026-04-03 10:05:03Z INFO CommandSettings] Flag 'version': 'False'
+[2026-04-03 10:05:03Z INFO CommandSettings] Flag 'commit': 'False'
+[2026-04-03 10:05:03Z INFO CommandSettings] Flag 'check': 'False'
+[2026-04-03 10:05:03Z INFO CommandSettings] Command 'configure': 'False'
+[2026-04-03 10:05:03Z INFO CommandSettings] Command 'remove': 'True'
+[2026-04-03 10:05:03Z INFO CommandSettings] Flag 'local': 'False'
+[2026-04-03 10:05:03Z INFO ConfigurationStore] IsServiceConfigured()
+[2026-04-03 10:05:03Z INFO ConfigurationStore] IsServiceConfigured: False
+[2026-04-03 10:05:03Z INFO ConfigurationStore] IsConfigured()
+[2026-04-03 10:05:03Z INFO ConfigurationStore] IsConfigured: True
+[2026-04-03 10:05:03Z INFO ConfigurationStore] HasCredentials()
+[2026-04-03 10:05:03Z INFO ConfigurationStore] stored True
+[2026-04-03 10:05:03Z INFO ConfigurationStore] Read setting file: 392 chars
+[2026-04-03 10:05:03Z INFO CommandSettings] Arg 'token': ''
+[2026-04-03 10:05:03Z INFO CommandSettings] Flag 'unattended': 'False'
+[2026-04-03 10:05:03Z INFO PromptManager] ReadValue
+[2026-04-03 10:05:03Z INFO Terminal] WRITE: Enter runner remove token: 
+[2026-04-03 10:05:03Z INFO Terminal] READ SECRET
+[2026-04-03 10:05:09Z INFO Terminal] Read value: '***'
+[2026-04-03 10:05:09Z ERR  Terminal] WRITE ERROR: Http response code: Unauthorized from 'POST https://api.github.com/actions/runner-registration' (Request Id: 15AF:378175:4D73FC:59F40D:69CF9050)
+[2026-04-03 10:05:09Z ERR  Terminal] WRITE ERROR: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-04-03 10:05:09Z ERR  ConfigurationManager] Failed to get tenant credentials -- Attempt: 1
+[2026-04-03 10:05:09Z ERR  ConfigurationManager] System.Net.Http.HttpRequestException: Response status code does not indicate success: 401 (Unauthorized).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at GitHub.Runner.Listener.Configuration.ConfigurationManager.GetTenantCredential(String githubUrl, String githubToken, String runnerEvent)
+[2026-04-03 10:05:09Z INFO ConfigurationManager] Retrying in 1 seconds
+[2026-04-03 10:05:11Z ERR  Terminal] WRITE ERROR: Http response code: Unauthorized from 'POST https://api.github.com/actions/runner-registration' (Request Id: 15B0:1E0917:4B9626:5810D7:69CF9052)
+[2026-04-03 10:05:11Z ERR  Terminal] WRITE ERROR: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-04-03 10:05:11Z ERR  ConfigurationManager] Failed to get tenant credentials -- Attempt: 2
+[2026-04-03 10:05:11Z ERR  ConfigurationManager] System.Net.Http.HttpRequestException: Response status code does not indicate success: 401 (Unauthorized).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at GitHub.Runner.Listener.Configuration.ConfigurationManager.GetTenantCredential(String githubUrl, String githubToken, String runnerEvent)
+[2026-04-03 10:05:11Z INFO ConfigurationManager] Retrying in 3 seconds
+[2026-04-03 10:05:15Z ERR  Terminal] WRITE ERROR: Http response code: Unauthorized from 'POST https://api.github.com/actions/runner-registration' (Request Id: 15B1:1B75F3:4C108A:58900C:69CF9056)
+[2026-04-03 10:05:15Z ERR  Terminal] WRITE ERROR: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-04-03 10:05:15Z ERR  Terminal] WRITE ERROR: Failed: Removing runner from the server
+[2026-04-03 10:05:15Z ERR  Runner] System.Net.Http.HttpRequestException: Response status code does not indicate success: 401 (Unauthorized).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at GitHub.Runner.Listener.Configuration.ConfigurationManager.GetTenantCredential(String githubUrl, String githubToken, String runnerEvent)
+   at GitHub.Runner.Listener.Configuration.ConfigurationManager.UnconfigureAsync(CommandSettings command)
+   at GitHub.Runner.Listener.Runner.ExecuteCommand(CommandSettings command)
+[2026-04-03 10:05:15Z ERR  Terminal] WRITE ERROR: Response status code does not indicate success: 401 (Unauthorized).
+[2026-04-03 10:05:15Z INFO Listener] Runner execution has finished with return code 1
