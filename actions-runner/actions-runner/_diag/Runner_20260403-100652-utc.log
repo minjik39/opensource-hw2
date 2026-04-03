@@ -122,3 +122,16 @@
 [2026-04-03 10:06:53Z INFO RunnerServer] EstablishVssConnection
 [2026-04-03 10:06:53Z INFO RunnerServer] Establish connection with 60 seconds timeout.
 [2026-04-03 10:06:53Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2026-04-03 10:06:53Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2026-04-03 10:06:53Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2026-04-03 10:06:54Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2026-04-03 10:06:54Z INFO BrokerMessageListener] VssConnection created
+[2026-04-03 10:06:54Z INFO Terminal] WRITE LINE: 
+[2026-04-03 10:06:54Z INFO Terminal] WRITE LINE: 
+[2026-04-03 10:06:54Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.credentials_rsaparams
+[2026-04-03 10:06:54Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file D:\코딩\mlops_sentiment_api\actions-runner\actions-runner\.credentials_rsaparams
+[2026-04-03 10:06:54Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2026-04-03 10:06:55Z INFO BrokerMessageListener] Session created.
+[2026-04-03 10:06:55Z INFO Terminal] WRITE LINE: Current runner version: '2.333.1'
+[2026-04-03 10:06:55Z INFO Terminal] WRITE LINE: 2026-04-03 10:06:55Z: Listening for Jobs
+[2026-04-03 10:06:55Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.

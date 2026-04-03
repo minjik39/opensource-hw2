@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "minjik39/opensource-hw2",
+  "pipelineDirectory": "opensource-hw2",
+  "workspaceDirectory": "opensource-hw2\\opensource-hw2",
+  "repositories": {
+    "minjik39/opensource-hw2": {
+      "repositoryPath": "opensource-hw2\\opensource-hw2",
+      "lastRunOn": "04/03/2026 19:08:48 +09:00"
+    }
+  },
+  "lastRunOn": "04/03/2026 19:18:52 +09:00"
+}

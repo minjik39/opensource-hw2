@@ -15,7 +15,11 @@ def read_root():
 @app.post("/predict", response_model=SentimentResponse)
 def predict_sentiment(request: SentimentRequest):
     """
-    입력된 텍스트의 감정을 예측합니다.
+    입력된 텍스트의 6가지 감정 강도를 예측합니다.
     """
     result = sentiment_model.predict(request.text)
-    return SentimentResponse(label=result["label"], score=result["score"])
+    return SentimentResponse(
+        top_emotion=result["top_emotion"], 
+        intensities=result["intensities"], 
+        score=result["score"]
+    )

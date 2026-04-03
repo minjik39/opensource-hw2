@@ -1,8 +1,14 @@
 from pydantic import BaseModel, Field
+from typing import Dict
 
 class SentimentRequest(BaseModel):
-    text: str = Field(..., title="분석할 문장", example="이 영화 정말 최고였어요! 다시 보고 싶네요.")
+    text: str = Field(..., title="분석할 문장", example="오늘 친구들과 맛있는 음식을 먹어서 너무 행복해!")
 
 class SentimentResponse(BaseModel):
-    label: str = Field(..., title="감정 레이블 (예: POSITIVE, NEGATIVE)")
+    top_emotion: str = Field(..., title="지배적인 감정", example="행복")
+    intensities: Dict[str, int] = Field(
+        ..., 
+        title="감정별 강도 (1~5)", 
+        example={"행복": 5, "슬픔": 1, "분노": 1, "공포": 1, "혐오": 1, "놀람": 1}
+    )
     score: float = Field(..., title="예측 신뢰도 (0.0 ~ 1.0)")
