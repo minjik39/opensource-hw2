@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+import os
 from app.models.schemas import SentimentRequest, SentimentResponse
 from app.services.ml_model import sentiment_model
 
@@ -8,9 +10,16 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# 현재 파일 위치를 기준으로 index.html 경로 설정
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_FILE = os.path.join(BASE_DIR, "index.html")
+
 @app.get("/")
 def read_root():
-    return {"message": "Sentiment Analysis API 서버가 정상적으로 실행 중입니다."}
+    """루트 경로 접속 시 예쁜 웹 프론트엔드를 보여줍니다."""
+    if os.path.exists(FRONTEND_FILE):
+        return FileResponse(FRONTEND_FILE)
+    return {"message": "index.html 파일을 찾을 수 없습니다."}
 
 @app.post("/predict", response_model=SentimentResponse)
 def predict_sentiment(request: SentimentRequest):
