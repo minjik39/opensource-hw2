@@ -241,7 +241,7 @@
         <h1>감정 분석 AI (Zero-Shot)</h1>
         
         <div class="input-group">
-            <textarea id="text-input" placeholder="당한 거 써보려고 갈아탄 게 개웃기네 ㅋㅋ&#10;처럼 은어나 장문을 입력해보세요! 분석에는 1~2초 정도 소요됩니다."></textarea>
+            <textarea id="text-input" placeholder="문장 또는 글을 입력하세요. 분석에는 1~2초 정도 소요됩니다."></textarea>
             <button id="analyze-btn">
                 <span id="btn-text">분석하기</span>
                 <div class="loader" id="loader"></div>
@@ -315,7 +315,7 @@
 
                 // Create Bars
                 Object.entries(data.intensities).forEach(([emotion, intensity]) => {
-                    const widthPercent = (intensity / 5) * 100;
+                    const widthPercent = (intensity / 10) * 100;
                     
                     const row = document.createElement('div');
                     row.className = 'bar-row';

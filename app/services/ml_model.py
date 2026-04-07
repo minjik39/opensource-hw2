@@ -2,55 +2,77 @@ from transformers import pipeline
 
 class SentimentModel:
     def __init__(self):
-        # 은어('개웃기네')까지 문맥을 완벽하게 파악하는 다국어 Zero-shot 분석 모델
-        self.model_name = "MoritzLaurer/mDeBERTa-v3-base-mnli-xnli"
-        print(f"[{self.model_name}] 모델을 로딩 중입니다... (Zero-shot)")
+        # 은어/구어체를 잘 파악하는 한국어 전용 감정 모델 (KcELECTRA 기반)
+        self.model_name = "PongKorea/emotion_kcelectra"
+        print(f"[{self.model_name}] 모델을 로딩 중입니다...")
         
         try:
             self.classifier = pipeline(
-                "zero-shot-classification", 
+                "text-classification", 
                 model=self.model_name
             )
             print("모델 로딩 완료.")
+            
+            # 모델의 세분화된 라벨들을 기존 UI의 6가지 척도로 그룹화
+            self.emotion_grouping = {
+                '행복': ['즐거운', '벅찬', '평온'],
+                '슬픔': ['슬픔', '비탄', '시무룩'],
+                '분노': ['화가나는', '격분한', '짜증스러운'],
+                '공포': ['공포', '불안', '긴장초조'],
+                '혐오': ['혐오스러운', '역겨운', '불쾌한'],
+                '놀람': [] # 직접 매칭되는 라벨 부재
+            }
         except Exception as e:
             print(f"모델 로딩 실패. 에러: {e}")
             raise e
 
     def _map_score_to_intensity(self, score: float) -> int:
-        """확률값(0~1)을 1~5 정수 강도로 변환합니다."""
-        if score <= 0.15: return 1
-        if score <= 0.30: return 2
-        if score <= 0.45: return 3
-        if score <= 0.60: return 4
-        return 5
+        """확률값(0~1)을 1~10 정수 강도로 변환합니다."""
+        val = int(round(score * 10))
+        return max(1, min(10, val))
 
     def predict(self, text: str) -> dict:
         try:
-            # 6가지 후보 감정을 주고 문장과 가장 잘 어울리는지 확률을 매깁니다.
-            candidate_labels = ["행복", "슬픔", "분노", "공포", "놀람", "혐오"]
+            raw_results = self.classifier(text, top_k=None)
             
-            # multi_label=False는 각 확률의 합이 1이 되도록 만듭니다. multi_label=True면 각각의 독립 확률(sigmoid)
-            results = self.classifier(text, candidate_labels=candidate_labels, multi_label=True)
+            if isinstance(raw_results, list) and len(raw_results) > 0:
+                results = raw_results[0]
+            else:
+                results = raw_results
+            
+            if isinstance(results, dict):
+                results = [results]
+            
+            # 6가지 기본 감정의 점수를 저장할 변수
+            grouped_scores = {"행복": 0.0, "슬픔": 0.0, "분노": 0.0, "공포": 0.0, "혐오": 0.0, "놀람": 0.0}
+            
+            for res in results:
+                if not isinstance(res, dict): continue
+                    
+                label = res.get('label', 'Unknown')
+                score = res.get('score', 0.0)
+                
+                # 라벨 그룹핑에 따라 최대 점수를 할당
+                for target_emotion, keywords in self.emotion_grouping.items():
+                    if label in keywords:
+                        grouped_scores[target_emotion] = max(grouped_scores[target_emotion], score)
             
             intensities = {}
             top_val = -1
             top_emotion = "중립"
             conf_score = 0
             
-            labels = results['labels']
-            scores = results['scores']
-            
-            for label, score in zip(labels, scores):
+            for emotion, score in grouped_scores.items():
                 intensity = self._map_score_to_intensity(score)
-                intensities[label] = intensity
+                intensities[emotion] = intensity
                 
                 if score > top_val:
                     top_val = score
-                    top_emotion = label
+                    top_emotion = emotion
                     conf_score = round(score, 4)
             
-            # 모든 점수가 너무 낮으면 중립 처리
-            if top_val < 0.3:
+            # 기준 확률 이하일 경우 중립
+            if top_val < 0.2:
                 top_emotion = "중립"
             
             return {
